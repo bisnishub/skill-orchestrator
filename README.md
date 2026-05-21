@@ -1,5 +1,7 @@
 # 🦞 Skill Orchestrator
 
+**🇧🇷 Português** · [🇺🇸 English](README_EN.md)
+
 > **Skill orquestradora de skills, tools e MCPs.**
 > Você fala em português, ela despacha pro caminho certo — Gmail, Calendar, Drive, Notion, Supabase, MCPs autenticados, mídia (Higgsfield), criação de conteúdo.
 >
@@ -14,6 +16,7 @@
 Mantida pela **CCB — Comunidade Claude/Claw Brasil**. De graça. Aberta. Pra todo mundo.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![lint](https://github.com/bisnishub/skill-orchestrator/actions/workflows/lint.yml/badge.svg)](https://github.com/bisnishub/skill-orchestrator/actions/workflows/lint.yml)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-skill-orange)](https://openclaw.ai)
 [![Hermes](https://img.shields.io/badge/Hermes-compatible-purple)](https://nousresearch.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-blueviolet)](https://claude.com/claude-code)
@@ -31,16 +34,39 @@ Quando você fala com seu agente, ele tem **N** caminhos possíveis pra te ajuda
 - 🗄️ **Dados** — Supabase + MCPs autenticados (CRMs, bancos, serviços)
 - 🎬 **Mídia** — Higgsfield (imagem/vídeo/virality), skill `video-use`
 - ✍️ **Criação de conteúdo** — lives, tutoriais, posts, guias, virality check
+- 🛠️ **Engenharia (dev solo)** — PR triage, code review, ship, debug CI
+- 💼 **Comercial / vendas** — pipeline lead → qualificação → follow-up → proposta
+- 🔍 **Pesquisa / análise** — web research, comparativos, fact-check, monitoramento
 - ⚙️ **Setup/Onboarding** — instalar OpenClaw, Hermes ou Claude Code; canais; skills
 
-**Pipelines prontas (playbooks):**
+**Slash commands batizados:**
 
-- Inbox triage diária
-- Agenda da semana com blocos de foco
-- Live/stream do zero (roteiro → slides → thumb → checklist)
-- Tutorial em vídeo (roteiro → corte → legenda → thumb → virality check)
-- Cross-source report (Supabase + MCPs)
-- Onboarding de agente (OpenClaw, Hermes ou Claude Code)
+| Comando | Faz |
+| --- | --- |
+| `/claw triage` | Triagem de inbox com classificação AÇÃO/FYI/LIXO |
+| `/claw weekly` | Agenda da semana + blocos de foco |
+| `/claw briefing` | Briefing do dia (emails urgentes, próxima reunião, top 3 tarefas) |
+| `/claw ship` | Pre-flight de deploy (PR, CI, changelog, migrations) |
+| `/claw live` | Live/stream do zero (roteiro + slides + thumb + checklist) |
+| `/claw repurpose <url>` | Repurpose 1 conteúdo em Shorts + thread + IG |
+| `/claw followup` | Drafts automáticos de follow-up pra leads silenciosos no CRM |
+| `/claw research <tópico>` | Pesquisa estruturada + relatório em Notion |
+| `/claw stats` | Telemetria local (privacy first) |
+| `/claw skills` | Lista skills carregadas |
+| `/claw help` | Referência de slash commands |
+
+**Modos / personas:**
+
+- `--mode dev` — técnico, direto (engenharia > dados > produtividade)
+- `--mode editor` — criativo, brand-aware (conteúdo > mídia > produtividade)
+- `--mode comercial` — CRM-first (comercial > produtividade > dados)
+- `--mode analista` — data-driven, sempre cita fonte (pesquisa > dados > produtividade)
+
+**Meta features que ninguém esperava:**
+
+- 🧠 **Auto-sugestão de skills** — se você usar a mesma rota 3× numa semana, ela se oferece pra virar skill própria
+- 📊 **Telemetria local** — `~/.skill-orchestrator/stats.json`, nada sai do agente
+- 🎭 **Persistência de modo** — fixa `--mode` como default até você desfixar
 
 ---
 
@@ -131,12 +157,16 @@ Exemplos que ela roteia bem:
 
 ```
 skill/                          ← source-of-truth única (idêntica nos 3 agents)
-├── SKILL.md                    ← entrypoint (frontmatter + matriz de roteamento)
+├── SKILL.md                    ← entrypoint (frontmatter + matriz + slashes + modos + telemetria)
 └── playbooks/
     ├── produtividade.md        ← Gmail/Calendar/Drive/Notion encadeados
     ├── dados.md                ← Supabase + MCPs / cross-source
     ├── conteudo.md             ← lives/tutoriais/posts/guias
-    └── setup-agents.md         ← onboarding/instalação/diagnóstico (OpenClaw + Hermes + Claude Code)
+    ├── engenheiro-solo.md      ← PR triage/review/ship/debug CI
+    ├── criador-conteudo.md     ← calendário editorial/repurpose/brand kit
+    ├── comercial.md            ← pipeline lead/qualificação/follow-up/proposta
+    ├── pesquisa.md             ← web research/comparativos/fact-check
+    └── setup-agents.md         ← onboarding/instalação/diagnóstico (3 agents)
 
 install.sh                      ← installer OpenClaw (nativo)
 install-hermes.sh               ← installer Hermes (Docker + permissões + restart)

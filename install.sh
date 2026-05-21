@@ -8,13 +8,33 @@ TARGET="${HOME}/.openclaw/skills/${SKILL_NAME}"
 REPO_URL="https://github.com/bisnishub/skill-orchestrator.git"
 TMP_DIR="$(mktemp -d)"
 
-c_blue=$'\033[1;34m'; c_green=$'\033[1;32m'; c_yellow=$'\033[1;33m'; c_red=$'\033[1;31m'; c_reset=$'\033[0m'
+c_blue=$'\033[1;34m'; c_green=$'\033[1;32m'; c_yellow=$'\033[1;33m'; c_red=$'\033[1;31m'; c_magenta=$'\033[1;35m'; c_reset=$'\033[0m'
 say()  { printf "%s🦞 %s%s\n" "$c_blue" "$*" "$c_reset"; }
 ok()   { printf "%s ✓ %s%s\n" "$c_green" "$*" "$c_reset"; }
 warn() { printf "%s ⚠ %s%s\n" "$c_yellow" "$*" "$c_reset"; }
 die()  { printf "%s ✗ %s%s\n" "$c_red" "$*" "$c_reset" >&2; exit 1; }
 
-say "Instalando Skill Orchestrator no OpenClaw (CCB)"
+banner() {
+  printf "%s" "$c_magenta"
+  cat <<'BANNER'
+
+    ╔══════════════════════════════════════════════╗
+    ║                                              ║
+    ║     🦞   S K I L L   O R C H E S T R A T O R ║
+    ║                                              ║
+    ║         ,_,    o roteador FODA da CCB        ║
+    ║        (o,o)        — pt-BR · MIT —          ║
+    ║       <)   (>                                ║
+    ║         " "    github.com/bisnishub           ║
+    ║                                              ║
+    ╚══════════════════════════════════════════════╝
+
+BANNER
+  printf "%s" "$c_reset"
+}
+
+banner
+say "Instalando no OpenClaw…"
 
 command -v git >/dev/null 2>&1 || die "git não encontrado. Instale antes de continuar."
 

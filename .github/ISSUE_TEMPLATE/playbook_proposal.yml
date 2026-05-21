@@ -1,0 +1,71 @@
+name: 💡 Playbook Proposal
+description: Propor um playbook novo (workflow composto) pra skill
+title: "[playbook] "
+labels: ["enhancement", "playbook"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Manda essa! Playbooks são o coração da skill. Quanto mais específico o gatilho e o fluxo, mais rápido aprovamos. 🦞
+
+  - type: input
+    id: name
+    attributes:
+      label: Nome proposto do playbook
+      description: "Em kebab-case. Ex: ecommerce.md, atendimento-whatsapp.md"
+      placeholder: "ex: ecommerce.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: gatilhos
+    attributes:
+      label: Gatilhos (frases do user que disparariam o playbook)
+      description: Mínimo 3 exemplos reais. Quanto mais variado, melhor.
+      placeholder: |
+        - "preciso lançar um produto novo"
+        - "campanha pra Black Friday"
+        - "fluxo completo do e-commerce"
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflows
+    attributes:
+      label: Workflows que o playbook cobriria
+      description: "Cada workflow é uma seção. Liste os principais com 1 linha cada."
+      placeholder: |
+        1. Setup de produto novo (Shopify + Instagram + estoque)
+        2. Campanha sazonal (briefing + criativos + agendamento)
+        3. Análise pós-campanha (vendas + ROAS + relatório)
+    validations:
+      required: true
+
+  - type: textarea
+    id: tools
+    attributes:
+      label: Tools/MCPs necessários
+      description: Liste exatamente quais MCPs ou tools o agente precisa ter pra rodar
+      placeholder: |
+        - Shopify MCP
+        - Instagram MCP (Meta Business)
+        - Higgsfield (mídia)
+        - Gmail (notificações)
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Por que esse playbook importa pra comunidade?
+      description: 1-2 parágrafos. Quem se beneficia, dor que resolve, frequência de uso esperada.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Antes de enviar, conferi que…
+      options:
+        - label: Não existe playbook similar já no repo (`ls skill/playbooks/`)
+          required: true
+        - label: Os gatilhos não conflitam com a matriz atual do `SKILL.md`
+          required: true

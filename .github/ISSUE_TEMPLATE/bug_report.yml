@@ -1,0 +1,72 @@
+name: 🐛 Bug Report
+description: Reportar comportamento inesperado da skill
+title: "[bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigada por reportar! Quanto mais detalhe, mais rápido a gente resolve. 🦞
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Qual agent você usa?
+      options:
+        - OpenClaw
+        - Hermes Agent
+        - Claude Code (CLI)
+        - Claude Code (IDE — VS Code/JetBrains)
+        - Outro (descrever abaixo)
+    validations:
+      required: true
+
+  - type: input
+    id: agent-version
+    attributes:
+      label: Versão do agent
+      description: "Ex: openclaw 0.x.y, claude-code 1.x.y, Hermes Docker image latest"
+      placeholder: "ex: openclaw 0.5.2"
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: O que você esperava que acontecesse?
+      placeholder: "Ex: ao digitar /claw triage, esperava ver a triagem do inbox"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: O que aconteceu de fato?
+      placeholder: "Ex: a skill não foi reconhecida"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos pra reproduzir
+      placeholder: |
+        1. Instalei via curl ... | bash
+        2. Reiniciei o agent
+        3. Digitei /claw triage
+        4. ...
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / output relevante
+      description: Cola qualquer mensagem de erro, output do `*-doctor` etc.
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Antes de enviar, conferi que…
+      options:
+        - label: Estou na versão mais recente do repo (`git pull` no clone OU rerodar o install)
+          required: true
+        - label: Não tem dado sensível (token, email pessoal, CPF) nos logs colados
+          required: true

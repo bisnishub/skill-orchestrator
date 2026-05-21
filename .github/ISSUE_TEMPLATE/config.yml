@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Dúvida / discussão
+    url: https://github.com/bisnishub/skill-orchestrator/discussions
+    about: Pra perguntas, ideias soltas, troca de experiência — abre uma Discussion ao invés de issue.
+  - name: 📚 Documentação OpenClaw
+    url: https://docs.openclaw.ai
+    about: Documentação oficial do OpenClaw (instalação, plugins, skills).
+  - name: 📚 Documentação Claude Code
+    url: https://docs.claude.com/claude-code
+    about: Documentação oficial do Claude Code.
