@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# OpenClaw Orchestrator installer
+# 🦞 Skill Orchestrator — installer para OpenClaw
 # CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/openclaw-orchestrator
 set -euo pipefail
 
@@ -14,7 +14,7 @@ ok()   { printf "%s ✓ %s%s\n" "$c_green" "$*" "$c_reset"; }
 warn() { printf "%s ⚠ %s%s\n" "$c_yellow" "$*" "$c_reset"; }
 die()  { printf "%s ✗ %s%s\n" "$c_red" "$*" "$c_reset" >&2; exit 1; }
 
-say "Instalando OpenClaw Orchestrator (CCB)"
+say "Instalando Skill Orchestrator no OpenClaw (CCB)"
 
 command -v git >/dev/null 2>&1 || die "git não encontrado. Instale antes de continuar."
 

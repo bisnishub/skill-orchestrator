@@ -12,7 +12,7 @@ metadata:
     compatible: true
 ---
 
-# Orchestrator — o roteador da CCB
+# 🦞 Skill Orchestrator — o roteador da CCB
 
 Funciona em **OpenClaw** (`~/.openclaw/skills/`), **Hermes Agent** (`~/.hermes/skills/`, montado em `/opt/data/skills/` no container) e **Claude Code** (`~/.claude/skills/` ou `.claude/skills/` por projeto). Mesma skill, três instaladores.
 

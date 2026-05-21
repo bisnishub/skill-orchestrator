@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# OpenClaw Orchestrator — installer para Hermes Agent (Nous Research)
+# 🦞 Skill Orchestrator — installer para Hermes Agent (Nous Research)
 # Roda no HOST do Hermes (a VPS ou máquina local que tem o docker-compose).
 # CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/openclaw-orchestrator
 set -euo pipefail
@@ -18,7 +18,7 @@ warn() { printf "%s ⚠ %s%s\n" "$c_yellow" "$*" "$c_reset"; }
 die()  { printf "%s ✗ %s%s\n" "$c_red" "$*" "$c_reset" >&2; exit 1; }
 
 # Preflight ------------------------------------------------------------------
-say "Instalando Orchestrator no Hermes Agent (CCB)"
+say "Instalando Skill Orchestrator no Hermes Agent (CCB)"
 
 command -v git    >/dev/null 2>&1 || die "git não encontrado."
 command -v docker >/dev/null 2>&1 || warn "docker não encontrado — vou copiar a skill mesmo assim, mas restart manual será necessário."

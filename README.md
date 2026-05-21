@@ -1,4 +1,4 @@
-# 🦞 OpenClaw Orchestrator
+# 🦞 Skill Orchestrator
 
 > **Skill orquestradora de skills, tools e MCPs.**
 > Você fala em português, ela despacha pro caminho certo — Gmail, Calendar, Drive, Notion, Supabase, MCPs autenticados, mídia (Higgsfield), criação de conteúdo.

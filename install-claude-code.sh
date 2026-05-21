@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# OpenClaw Orchestrator — installer para Claude Code (CLI / IDE / Desktop)
+# 🦞 Skill Orchestrator — installer para Claude Code (CLI / IDE / Desktop)
 # Skills do Claude Code vivem em ~/.claude/skills/<nome>/ (machine-wide)
 # ou em .claude/skills/<nome>/ na raiz do projeto (--project).
 # CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/openclaw-orchestrator
@@ -28,7 +28,7 @@ ok()   { printf "%s ✓ %s%s\n" "$c_green" "$*" "$c_reset"; }
 warn() { printf "%s ⚠ %s%s\n" "$c_yellow" "$*" "$c_reset"; }
 die()  { printf "%s ✗ %s%s\n" "$c_red" "$*" "$c_reset" >&2; exit 1; }
 
-say "Instalando Orchestrator no Claude Code ($SCOPE)"
+say "Instalando Skill Orchestrator no Claude Code ($SCOPE)"
 
 command -v git >/dev/null 2>&1 || die "git não encontrado. Instale antes."
 
