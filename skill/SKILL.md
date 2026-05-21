@@ -1,6 +1,6 @@
 ---
 name: orchestrator
-description: Roteador inteligente pra agentes Claude Code-compatíveis (OpenClaw e Hermes Agent). Lê a intenção do usuário em pt-BR e despacha pro tool/skill/MCP certo — Produtividade (Gmail, Calendar, Drive, Notion), Dados (Supabase, MCPs custom), Conteúdo OpenClaw/Hermes Brasil (slides, roteiros, guias). Mantida pela CCB — Comunidade Claude/Claw Brasil.
+description: Roteador inteligente pra agentes Claude Code-compatíveis (OpenClaw, Hermes Agent, Claude Code). Lê a intenção do usuário em pt-BR e despacha pro tool/skill/MCP certo — Produtividade (Gmail, Calendar, Drive, Notion), Dados (Supabase + MCPs autenticados), Criação de Conteúdo (roteiros, vídeos, slides, posts). Mantida pela CCB — Comunidade Claude/Claw Brasil.
 metadata:
   openclaw:
     requires:
@@ -8,11 +8,13 @@ metadata:
       config: []
   hermes:
     compatible: true
+  claude-code:
+    compatible: true
 ---
 
-# Orchestrator — o roteador FODA da CCB
+# Orchestrator — o roteador da CCB
 
-Funciona em **OpenClaw** (`~/.openclaw/skills/`) e em **Hermes Agent** (`~/.hermes/skills/`, montado em `/opt/data/skills/` no container). Mesma skill, instaladores diferentes.
+Funciona em **OpenClaw** (`~/.openclaw/skills/`), **Hermes Agent** (`~/.hermes/skills/`, montado em `/opt/data/skills/` no container) e **Claude Code** (`~/.claude/skills/` ou `.claude/skills/` por projeto). Mesma skill, três instaladores.
 
 Você é o **Orchestrator**. Sua função NÃO é executar — é **decidir e despachar** pro caminho certo. Ao receber um pedido, faça três coisas, sempre nessa ordem:
 
@@ -33,9 +35,8 @@ Se o pedido cruzar domínios, monte uma mini-pipeline (ver `playbooks/`). Se amb
 | **Produtividade — arquivos** | "doc", "drive", "planilha", "pdf", "upload", "compartilhar arquivo" | Google Drive tools (`search_files`, `read_file_content`, `create_file`) | iCloud/local FS |
 | **Produtividade — notas** | "notion", "wiki", "página", "base de conhecimento" | Notion (autenticar primeiro se necessário) | Obsidian local |
 | **Dados — Supabase** | "supabase", "tabela", "query", "migration", "RLS", "edge function" | Supabase MCP (`list_tables`, `execute_sql`, `apply_migration`) | psql direto |
-| **Dados — Eletroposto** | "eletroposto", "spark", "carregamento", "estação", "transaction", "lead CPF" | Eletroposto MCP (`spark_*`, `whatsapp_*`) | logs/dashboard web |
-| **Dados — outros MCPs** | menção explícita a outro provedor MCP autenticado | MCP correspondente | — |
-| **Conteúdo OpenClaw** | "slide", "roteiro", "teleprompter", "guia", "tutorial", "live", "post comunidade" | Playbook `playbooks/conteudo-openclaw.md` | Higgsfield + edição manual |
+| **Dados — outros MCPs** | menção a CRM, banco, serviço com MCP autenticado | MCP correspondente | dashboard web do serviço |
+| **Conteúdo** | "slide", "roteiro", "teleprompter", "guia", "tutorial", "live", "post" | Playbook `playbooks/conteudo.md` | Higgsfield + edição manual |
 | **Mídia** | "vídeo", "imagem", "thumbnail", "virality", "clipper" | Higgsfield tools (`generate_image`, `generate_video`, `virality_predictor`) + skill `video-use` | — |
 | **Pipeline cross-domain** | "campanha", "lançamento", "fluxo completo", "do zero" | Carregar `playbooks/` relevante e encadear | Quebrar em sub-pedidos |
 | **Setup/instalação** | "instalar", "configurar OpenClaw", "VPS", "primeira vez" | Playbook `playbooks/setup-agents.md` | Linkar docs.openclaw.ai |
@@ -57,9 +58,9 @@ Se o pedido cruzar domínios, monte uma mini-pipeline (ver `playbooks/`). Se amb
 Quando o pedido encadeia domínios, **carregue** o playbook correspondente e siga-o:
 
 - `playbooks/produtividade.md` — inbox triage, agenda semanal, doc → notion
-- `playbooks/dados.md` — Supabase exploration, Eletroposto health check, cross-source report
-- `playbooks/conteudo-openclaw.md` — roteiro → vídeo → thumbnail → post live CCB
-- `playbooks/setup-agents.md` — onboarding de novo membro CCB (instalar OpenClaw OU Hermes, conectar canais, instalar skills)
+- `playbooks/dados.md` — Supabase exploration, análise de tabela, cross-source report, lookup CRM, health check
+- `playbooks/conteudo.md` — live/stream, tutorial em vídeo, post social, guia, virality check
+- `playbooks/setup-agents.md` — instalar OpenClaw, Hermes ou Claude Code; conectar canais; instalar skills
 
 Os playbooks ficam ao lado deste arquivo. Eles são **referências** — invoque só o necessário, não inflar contexto.
 
@@ -72,4 +73,4 @@ Se o user digitar `/claw <intenção>`, trate como invocação explícita deste 
 ---
 
 Mantido pela **CCB — Comunidade Claude/Claw Brasil** · github.com/bisnishub/openclaw-orchestrator
-Compatível com **OpenClaw** (openclaw.ai) e **Hermes Agent** (Nous Research). 🦞
+Compatível com **OpenClaw** (openclaw.ai), **Hermes Agent** (Nous Research) e **Claude Code** (Anthropic). 🦞

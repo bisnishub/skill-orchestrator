@@ -1,15 +1,22 @@
 # 🦞 OpenClaw Orchestrator
 
 > **Skill orquestradora de skills, tools e MCPs.**
-> Você fala em português, ela despacha pro caminho certo — Gmail, Calendar, Drive, Notion, Supabase, MCPs custom, mídia (Higgsfield), conteúdo da comunidade.
+> Você fala em português, ela despacha pro caminho certo — Gmail, Calendar, Drive, Notion, Supabase, MCPs autenticados, mídia (Higgsfield), criação de conteúdo.
 >
-> **Roda em [OpenClaw](https://openclaw.ai) e em [Hermes Agent](https://nousresearch.com/hermes) (Nous Research).** Mesma skill, dois installers.
+> Roda em **três agentes Claude Code-compatíveis**:
+>
+> - 🦞 [OpenClaw](https://openclaw.ai)
+> - 🌀 [Hermes Agent](https://nousresearch.com) (Nous Research)
+> - 💎 [Claude Code](https://claude.com/claude-code) (Anthropic)
+>
+> Mesma skill, três installers.
 
 Mantida pela **CCB — Comunidade Claude/Claw Brasil**. De graça. Aberta. Pra todo mundo.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-skill-orange)](https://openclaw.ai)
 [![Hermes](https://img.shields.io/badge/Hermes-compatible-purple)](https://nousresearch.com)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-blueviolet)](https://claude.com/claude-code)
 [![pt-BR](https://img.shields.io/badge/lang-pt--BR-green)](https://github.com/bisnishub/openclaw-orchestrator)
 
 ---
@@ -21,19 +28,19 @@ Quando você fala com seu agente, ele tem **N** caminhos possíveis pra te ajuda
 **Domínios cobertos:**
 
 - 📬 **Produtividade** — Gmail, Google Calendar, Google Drive, Notion
-- 🗄️ **Dados** — Supabase, MCPs custom (ex: Eletroposto/Spark)
+- 🗄️ **Dados** — Supabase + MCPs autenticados (CRMs, bancos, serviços)
 - 🎬 **Mídia** — Higgsfield (imagem/vídeo/virality), skill `video-use`
-- 📚 **Conteúdo CCB** — slides, roteiros, guias, lives, posts
-- ⚙️ **Setup/Onboarding** — instalação OpenClaw OU Hermes, canais, skills
+- ✍️ **Criação de conteúdo** — lives, tutoriais, posts, guias, virality check
+- ⚙️ **Setup/Onboarding** — instalar OpenClaw, Hermes ou Claude Code; canais; skills
 
 **Pipelines prontas (playbooks):**
 
 - Inbox triage diária
 - Agenda da semana com blocos de foco
-- Live CCB do zero (roteiro → slides → thumb → checklist)
+- Live/stream do zero (roteiro → slides → thumb → checklist)
 - Tutorial em vídeo (roteiro → corte → legenda → thumb → virality check)
 - Cross-source report (Supabase + MCPs)
-- Onboarding novo membro CCB (OpenClaw ou Hermes)
+- Onboarding de agente (OpenClaw, Hermes ou Claude Code)
 
 ---
 
@@ -47,14 +54,7 @@ A skill é a mesma — muda só **onde** ela vive e **como** o agente recarrega.
 curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install.sh | bash
 ```
 
-Isso copia a skill pra `~/.openclaw/skills/orchestrator/`. Depois, no OpenClaw, rode `/new` ou reinicie a sessão.
-
-**Manual:**
-
-```bash
-git clone https://github.com/bisnishub/openclaw-orchestrator.git
-cp -r openclaw-orchestrator/skill ~/.openclaw/skills/orchestrator
-```
+Destino: `~/.openclaw/skills/orchestrator/`. Depois rode `/new` ou reinicie a sessão.
 
 ---
 
@@ -66,18 +66,9 @@ Roda no **host da VPS** onde o Hermes está instalado (precisa de `sudo` pra mex
 curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install-hermes.sh | sudo bash
 ```
 
-Isso copia a skill pra `~/.hermes/skills/orchestrator/`, ajusta `chown hermes:hermes`, e reinicia os containers.
+Destino: `~/.hermes/skills/orchestrator/`. O installer ajusta `chown hermes:hermes` e roda `docker compose restart`.
 
-**Manual** (dentro do host, como root):
-
-```bash
-git clone https://github.com/bisnishub/openclaw-orchestrator.git
-cp -r openclaw-orchestrator/skill /home/hermes/.hermes/skills/orchestrator
-chown -R hermes:hermes /home/hermes/.hermes/skills/orchestrator
-cd /home/hermes/hermes && docker compose restart
-```
-
-**Caso seus paths sejam diferentes** (instalação custom), override antes de rodar:
+Override de paths (instalação custom):
 
 ```bash
 HERMES_DATA=/seu/caminho/.hermes \
@@ -85,11 +76,31 @@ HERMES_COMPOSE_DIR=/seu/caminho/hermes \
 sudo -E bash install-hermes.sh
 ```
 
-**Validar que carregou:**
+Validar:
 
 ```bash
 docker exec -it hermes bash -lc "ls /opt/data/skills/ | grep orchestrator"
 ```
+
+---
+
+### 💎 Claude Code (Anthropic)
+
+Machine-wide (default):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install-claude-code.sh | bash
+```
+
+Destino: `~/.claude/skills/orchestrator/`.
+
+Só no projeto atual:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install-claude-code.sh | bash -s -- --project
+```
+
+Destino: `./.claude/skills/orchestrator/` (na pasta atual). Reinicie o CLI ou abra nova sessão.
 
 ---
 
@@ -109,32 +120,32 @@ Exemplos que ela roteia bem:
 | --- | --- |
 | "Vê o que tem no inbox e me dá os 3 mais importantes" | `Gmail.search_threads` + classificação |
 | "Marca 2h de foco amanhã de manhã" | `Calendar.suggest_time` + `create_event` |
-| "Quantas transações o Eletroposto rodou hoje?" | `spark_list_transactions` MCP |
+| "Quantos registros tem a tabela users?" | `Supabase.execute_sql` (read-only) |
 | "Faz a thumbnail da live de hoje" | `Higgsfield.generate_image` |
-| "Preciso de roteiro pra tutorial de Supabase em pt-BR" | Playbook `conteudo-openclaw.md` |
-| "Como instalo OpenClaw na minha VPS?" | Playbook `setup-agents.md` (seção OpenClaw) |
-| "Hermes não reconhece a skill nova" | Playbook `setup-agents.md` (seção Hermes) |
+| "Preciso de roteiro pra tutorial em pt-BR" | Playbook `conteudo.md` |
+| "Como instalo OpenClaw / Hermes / Claude Code?" | Playbook `setup-agents.md` |
 
 ---
 
 ## Estrutura
 
 ```
-skill/                          ← source-of-truth única (idêntica nos 2 agents)
+skill/                          ← source-of-truth única (idêntica nos 3 agents)
 ├── SKILL.md                    ← entrypoint (frontmatter + matriz de roteamento)
 └── playbooks/
     ├── produtividade.md        ← Gmail/Calendar/Drive/Notion encadeados
-    ├── dados.md                ← Supabase/Eletroposto/cross-source
-    ├── conteudo-openclaw.md    ← slides/roteiros/lives/posts
-    └── setup-agents.md         ← onboarding/instalação/diagnóstico (OpenClaw + Hermes)
+    ├── dados.md                ← Supabase + MCPs / cross-source
+    ├── conteudo.md             ← lives/tutoriais/posts/guias
+    └── setup-agents.md         ← onboarding/instalação/diagnóstico (OpenClaw + Hermes + Claude Code)
 
 install.sh                      ← installer OpenClaw (nativo)
 install-hermes.sh               ← installer Hermes (Docker + permissões + restart)
+install-claude-code.sh          ← installer Claude Code (machine-wide ou per-project)
 ```
 
 A skill é **pequena por design**: a matriz vive no `SKILL.md`, e os playbooks só são carregados quando o pedido pede pipeline composta. Isso evita inflar contexto.
 
-**Por que mono-repo e não dois repos?** Porque OpenClaw e Hermes usam o **mesmo formato Claude Code Skills** (YAML frontmatter + markdown). Duplicar o conteúdo é receita pra divergência. Aqui o `skill/` é único — só `install.sh` vs `install-hermes.sh` diverge, e essas diferenças são puramente operacionais (path, permissões, reload).
+**Por que mono-repo?** Os três agents usam o **mesmo formato Claude Code Skills da Anthropic** (YAML frontmatter `name`/`description` + markdown body). Duplicar conteúdo é receita pra divergência. Aqui o `skill/` é único — só os installers divergem, e as diferenças são puramente operacionais (path, permissões, reload).
 
 ---
 
@@ -142,16 +153,16 @@ A skill é **pequena por design**: a matriz vive no `SKILL.md`, e os playbooks s
 
 | Agent | Path destino | Reload | Status |
 | --- | --- | --- | --- |
-| OpenClaw (macOS/Linux/Win) | `~/.openclaw/skills/orchestrator/` | `/new` na sessão | ✅ Suportado |
-| Hermes Agent (Docker) | `~/.hermes/skills/orchestrator/` → `/opt/data/skills/` | `docker compose restart` | ✅ Suportado |
-| Claude Code (CLI/IDE) | `~/.claude/skills/orchestrator/` | reinicia o CLI | 🔜 Roadmap |
+| OpenClaw (macOS/Linux/Win) | `~/.openclaw/skills/orchestrator/` | `/new` na sessão | ✅ |
+| Hermes Agent (Docker) | `~/.hermes/skills/orchestrator/` → `/opt/data/skills/` | `docker compose restart` | ✅ |
+| Claude Code (CLI/IDE) | `~/.claude/skills/orchestrator/` ou `.claude/skills/orchestrator/` | reinicia o CLI / nova sessão | ✅ |
 | Outros agents Claude Code-compatíveis | — | — | provavelmente funciona se respeita o formato Skill |
 
 ---
 
 ## Contribuir
 
-PRs bem-vindas. Se você é da CCB e quer adicionar um playbook (ex: "campanha de e-commerce", "atendimento WhatsApp"), abre uma issue com o gatilho e o fluxo de despacho.
+PRs bem-vindas. Se quiser adicionar um playbook (ex: "campanha de e-commerce", "atendimento WhatsApp"), abre uma issue com o **gatilho** (frases que disparam) e o **fluxo de despacho** (qual tool/MCP em cada passo).
 
 Padrões:
 
@@ -159,17 +170,16 @@ Padrões:
 - Concisão > completude (instrua o agente no **que** fazer, não em **como ser um AI**)
 - Cite a tool/MCP exata pelo nome
 - Sem dados sensíveis em exemplos
-- Se mudar comportamento que afeta install, **atualizar os dois installers**
+- Se mudar comportamento que afeta install, **atualizar os três installers**
 
 ---
 
 ## Roadmap
 
-- [ ] Suporte oficial Claude Code (`~/.claude/skills/`)
-- [ ] Publicar no ClawHub (clawhub.ai) quando registry liberar uploads
-- [ ] Playbook "campanha de e-commerce" (Shopify + Instagram + Higgsfield)
-- [ ] Playbook "atendimento WhatsApp" (Eletroposto MCP + WhatsApp channel)
+- [ ] Publicar no ClawHub (clawhub.ai) quando registry liberar uploads externos
 - [ ] Skill companheira `orchestrator-stats`: telemetria de qual despacho mais usado
+- [ ] Playbook "campanha de e-commerce"
+- [ ] Playbook "atendimento WhatsApp" (canal + CRM via MCP)
 
 ---
 
@@ -177,7 +187,8 @@ Padrões:
 
 - **OpenClaw** — Peter Steinberger ([@steipete](https://x.com/steipete)) e contribuidores · [openclaw.ai](https://openclaw.ai)
 - **Hermes Agent** — Nous Research · [nousresearch.com](https://nousresearch.com)
-- **CCB / Open Claw Brasil** — Eduardo Cavalcanti e a comunidade brasileira
+- **Claude Code** — Anthropic · [claude.com/claude-code](https://claude.com/claude-code)
+- **CCB / Open Claw Brasil** — comunidade brasileira mantenedora deste repo
 
 ---
 

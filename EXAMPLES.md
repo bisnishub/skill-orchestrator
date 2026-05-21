@@ -36,16 +36,16 @@ playbooks/conteudo-openclaw.md #1 (Live CCB do zero).
 
 ### Cross-source report
 
-> **Você:** preciso saber quantos leads vieram do eletroposto e cruzar com o cadastro no supabase
+> **Você:** preciso cruzar usuários do supabase com leads do nosso CRM
 
 **Orchestrator:**
 
 ```
-Pedido cruza dois MCPs (eletroposto + supabase). Playbook dados.md #4
+Pedido cruza duas fontes (Supabase + CRM via MCP). Playbook dados.md #3
 (cross-source report). Vou puxar JSON de cada fonte e mesclar.
 ```
 
-→ `spark_list_leads` + `Supabase.execute_sql`, merge em memória, devolve markdown com tabela e 3 insights.
+→ `Supabase.execute_sql` + MCP do CRM autenticado, merge em memória, devolve markdown com tabela e 3 insights.
 
 ---
 
@@ -72,7 +72,7 @@ despacho porque você usou /claw.
 
 ```
 Pedido ambíguo. Uma pergunta: "aquilo" é (a) inbox / agenda,
-(b) algo no Eletroposto/Supabase, ou (c) outra coisa?
+(b) algo no banco / CRM, ou (c) outra coisa?
 ```
 
 → sem inventar, sem listar 10 opções. Uma pergunta, despacha na resposta.
