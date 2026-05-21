@@ -72,5 +72,5 @@ Se o user digitar `/claw <intenção>`, trate como invocação explícita deste 
 
 ---
 
-Mantido pela **CCB — Comunidade Claude/Claw Brasil** · github.com/bisnishub/openclaw-orchestrator
+Mantido pela **CCB — Comunidade Claude/Claw Brasil** · github.com/bisnishub/skill-orchestrator
 Compatível com **OpenClaw** (openclaw.ai), **Hermes Agent** (Nous Research) e **Claude Code** (Anthropic). 🦞

@@ -17,7 +17,7 @@ Mantida pela **CCB — Comunidade Claude/Claw Brasil**. De graça. Aberta. Pra t
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-skill-orange)](https://openclaw.ai)
 [![Hermes](https://img.shields.io/badge/Hermes-compatible-purple)](https://nousresearch.com)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-blueviolet)](https://claude.com/claude-code)
-[![pt-BR](https://img.shields.io/badge/lang-pt--BR-green)](https://github.com/bisnishub/openclaw-orchestrator)
+[![pt-BR](https://img.shields.io/badge/lang-pt--BR-green)](https://github.com/bisnishub/skill-orchestrator)
 
 ---
 
@@ -51,7 +51,7 @@ A skill é a mesma — muda só **onde** ela vive e **como** o agente recarrega.
 ### 🦞 OpenClaw
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install.sh | bash
 ```
 
 Destino: `~/.openclaw/skills/orchestrator/`. Depois rode `/new` ou reinicie a sessão.
@@ -63,7 +63,7 @@ Destino: `~/.openclaw/skills/orchestrator/`. Depois rode `/new` ou reinicie a se
 Roda no **host da VPS** onde o Hermes está instalado (precisa de `sudo` pra mexer em `/home/hermes/.hermes/`):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install-hermes.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes.sh | sudo bash
 ```
 
 Destino: `~/.hermes/skills/orchestrator/`. O installer ajusta `chown hermes:hermes` e roda `docker compose restart`.
@@ -89,7 +89,7 @@ docker exec -it hermes bash -lc "ls /opt/data/skills/ | grep orchestrator"
 Machine-wide (default):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install-claude-code.sh | bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-claude-code.sh | bash
 ```
 
 Destino: `~/.claude/skills/orchestrator/`.
@@ -97,7 +97,7 @@ Destino: `~/.claude/skills/orchestrator/`.
 Só no projeto atual:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/openclaw-orchestrator/main/install-claude-code.sh | bash -s -- --project
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-claude-code.sh | bash -s -- --project
 ```
 
 Destino: `./.claude/skills/orchestrator/` (na pasta atual). Reinicie o CLI ou abra nova sessão.

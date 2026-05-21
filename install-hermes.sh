@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # 🦞 Skill Orchestrator — installer para Hermes Agent (Nous Research)
 # Roda no HOST do Hermes (a VPS ou máquina local que tem o docker-compose).
-# CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/openclaw-orchestrator
+# CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/skill-orchestrator
 set -euo pipefail
 
 SKILL_NAME="orchestrator"
 HERMES_DATA="${HERMES_DATA:-/home/hermes/.hermes}"   # override com HERMES_DATA=... se sua VPS não usa esse path
 TARGET="${HERMES_DATA}/skills/${SKILL_NAME}"
 HERMES_COMPOSE_DIR="${HERMES_COMPOSE_DIR:-/home/hermes/hermes}"
-REPO_URL="https://github.com/bisnishub/openclaw-orchestrator.git"
+REPO_URL="https://github.com/bisnishub/skill-orchestrator.git"
 TMP_DIR="$(mktemp -d)"
 
 c_blue=$'\033[1;34m'; c_green=$'\033[1;32m'; c_yellow=$'\033[1;33m'; c_red=$'\033[1;31m'; c_reset=$'\033[0m'
@@ -86,7 +86,7 @@ cat <<EOF
     HERMES_DATA          (default: /home/hermes/.hermes)
     HERMES_COMPOSE_DIR   (default: /home/hermes/hermes)
 
-  Comunidade: github.com/bisnishub/openclaw-orchestrator
+  Comunidade: github.com/bisnishub/skill-orchestrator
   CCB — Open Claw Brasil 🇧🇷
 
 EOF

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # 🦞 Skill Orchestrator — installer para OpenClaw
-# CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/openclaw-orchestrator
+# CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/skill-orchestrator
 set -euo pipefail
 
 SKILL_NAME="orchestrator"
 TARGET="${HOME}/.openclaw/skills/${SKILL_NAME}"
-REPO_URL="https://github.com/bisnishub/openclaw-orchestrator.git"
+REPO_URL="https://github.com/bisnishub/skill-orchestrator.git"
 TMP_DIR="$(mktemp -d)"
 
 c_blue=$'\033[1;34m'; c_green=$'\033[1;32m'; c_yellow=$'\033[1;33m'; c_red=$'\033[1;31m'; c_reset=$'\033[0m'
@@ -42,7 +42,7 @@ cat <<'EOF'
     2. Teste: diga "limpa meu inbox" ou "/claw como instalo na VPS"
     3. Leia os playbooks em ~/.openclaw/skills/orchestrator/playbooks/
 
-  Comunidade: github.com/bisnishub/openclaw-orchestrator
+  Comunidade: github.com/bisnishub/skill-orchestrator
   CCB — Open Claw Brasil 🇧🇷
 
 EOF

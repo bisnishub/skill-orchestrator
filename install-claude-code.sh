@@ -2,11 +2,11 @@
 # 🦞 Skill Orchestrator — installer para Claude Code (CLI / IDE / Desktop)
 # Skills do Claude Code vivem em ~/.claude/skills/<nome>/ (machine-wide)
 # ou em .claude/skills/<nome>/ na raiz do projeto (--project).
-# CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/openclaw-orchestrator
+# CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/skill-orchestrator
 set -euo pipefail
 
 SKILL_NAME="orchestrator"
-REPO_URL="https://github.com/bisnishub/openclaw-orchestrator.git"
+REPO_URL="https://github.com/bisnishub/skill-orchestrator.git"
 
 # Default: machine-wide. Flag --project = na pasta atual.
 SCOPE="user"
@@ -60,7 +60,7 @@ cat <<EOF
     bash install-claude-code.sh             # ~/.claude/skills/ (machine-wide, default)
     bash install-claude-code.sh --project   # ./.claude/skills/ (só no projeto atual)
 
-  Comunidade: github.com/bisnishub/openclaw-orchestrator
+  Comunidade: github.com/bisnishub/skill-orchestrator
   CCB — Open Claw Brasil 🇧🇷
 
 EOF
