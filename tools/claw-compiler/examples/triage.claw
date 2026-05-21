@@ -1,0 +1,16 @@
+skill InboxTriage
+description: Triagem de inbox com classificação AÇÃO/FYI/LIXO e ações sugeridas
+mode: default
+
+when "/claw triage", "limpa inbox", "triagem", "o que importa no inbox"
+  use Gmail.search_threads
+  with query="is:unread newer_than:2d", limit=30
+  then ask "Confirma triagem das threads listadas?"
+  then use Gmail.label_thread
+  with label="FYI-Bot", filter="fyi"
+  then notify discord "#daily" "Inbox triado: ${action_count} ações, ${fyi_count} FYI, ${trash_count} arquivados"
+
+when "/claw triage --aggressive"
+  use Gmail.search_threads
+  with query="is:unread", limit=100
+  then ask "Modo agressivo — vou processar até 100 threads. Continuar?"

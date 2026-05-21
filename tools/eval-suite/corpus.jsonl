@@ -1,0 +1,64 @@
+{"intent":"limpa meu inbox","expected_domain":"produtividade-email","expected_tool":"Gmail.search_threads"}
+{"intent":"manda email pro joão sobre a proposta","expected_domain":"produtividade-email","expected_tool":"Gmail.create_draft"}
+{"intent":"responde aquela thread","expected_domain":"produtividade-email","expected_tool":"Gmail.search_threads"}
+{"intent":"draft um rascunho","expected_domain":"produtividade-email","expected_tool":"Gmail.create_draft"}
+{"intent":"label todas as threads do cliente","expected_domain":"produtividade-email","expected_tool":"Gmail.label_thread"}
+{"intent":"marca reunião com a Maria amanhã","expected_domain":"produtividade-agenda","expected_tool":"Calendar.create_event"}
+{"intent":"qual minha agenda da semana","expected_domain":"produtividade-agenda","expected_tool":"Calendar.list_events"}
+{"intent":"horário livre na quinta","expected_domain":"produtividade-agenda","expected_tool":"Calendar.suggest_time"}
+{"intent":"convite pra todo time","expected_domain":"produtividade-agenda","expected_tool":"Calendar.create_event"}
+{"intent":"reagendar a call das 3","expected_domain":"produtividade-agenda","expected_tool":"Calendar.update_event"}
+{"intent":"abre o doc do projeto","expected_domain":"produtividade-arquivos","expected_tool":"Drive.search_files"}
+{"intent":"compartilha essa planilha","expected_domain":"produtividade-arquivos","expected_tool":"Drive.get_file_metadata"}
+{"intent":"upload do pdf no drive","expected_domain":"produtividade-arquivos","expected_tool":"Drive.create_file"}
+{"intent":"acha o pdf do contrato","expected_domain":"produtividade-arquivos","expected_tool":"Drive.search_files"}
+{"intent":"joga isso no notion","expected_domain":"produtividade-notas","expected_tool":"Notion"}
+{"intent":"cria página na wiki","expected_domain":"produtividade-notas","expected_tool":"Notion"}
+{"intent":"base de conhecimento sobre X","expected_domain":"produtividade-notas","expected_tool":"Notion"}
+{"intent":"lista tabelas do supabase","expected_domain":"dados-supabase","expected_tool":"Supabase.list_tables"}
+{"intent":"query na tabela de usuários","expected_domain":"dados-supabase","expected_tool":"Supabase.execute_sql"}
+{"intent":"quantos registros tem essa tabela","expected_domain":"dados-supabase","expected_tool":"Supabase.execute_sql"}
+{"intent":"aplicar migration nova","expected_domain":"dados-supabase","expected_tool":"Supabase.apply_migration"}
+{"intent":"edge function da api","expected_domain":"dados-supabase","expected_tool":"Supabase.deploy_edge_function"}
+{"intent":"como tá o RLS dessa tabela","expected_domain":"dados-supabase","expected_tool":"Supabase.list_tables"}
+{"intent":"busca o cliente no CRM","expected_domain":"dados-outros-mcps","expected_tool":"crm"}
+{"intent":"histórico desse lead","expected_domain":"dados-outros-mcps","expected_tool":"crm"}
+{"intent":"faz o roteiro da live","expected_domain":"conteudo","expected_tool":"conteudo.md"}
+{"intent":"slides pra apresentação","expected_domain":"conteudo","expected_tool":"conteudo.md"}
+{"intent":"teleprompter do vídeo","expected_domain":"conteudo","expected_tool":"conteudo.md"}
+{"intent":"guia em texto sobre Y","expected_domain":"conteudo","expected_tool":"conteudo.md"}
+{"intent":"post pra comunidade","expected_domain":"conteudo","expected_tool":"conteudo.md"}
+{"intent":"tutorial em texto","expected_domain":"conteudo","expected_tool":"conteudo.md"}
+{"intent":"gera uma imagem da capa","expected_domain":"midia","expected_tool":"Higgsfield.generate_image"}
+{"intent":"thumbnail do vídeo","expected_domain":"midia","expected_tool":"Higgsfield.generate_image"}
+{"intent":"vídeo curto de B-roll","expected_domain":"midia","expected_tool":"Higgsfield.generate_video"}
+{"intent":"esse vídeo vai bombar?","expected_domain":"midia","expected_tool":"Higgsfield.virality_predictor"}
+{"intent":"prediz a virality","expected_domain":"midia","expected_tool":"Higgsfield.virality_predictor"}
+{"intent":"clipper do podcast","expected_domain":"midia","expected_tool":"Higgsfield"}
+{"intent":"PRs abertos no repo","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"review do PR 142","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"build CI tá vermelho","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"deployar isso","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"merge esse branch","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"abre issue nova","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"lint do projeto","expected_domain":"engenharia","expected_tool":"gh"}
+{"intent":"meus leads novos","expected_domain":"comercial","expected_tool":"comercial.md"}
+{"intent":"follow-up com quem tá silencioso","expected_domain":"comercial","expected_tool":"comercial.md"}
+{"intent":"qualifica esse lead","expected_domain":"comercial","expected_tool":"comercial.md"}
+{"intent":"prepara proposta pra Acme","expected_domain":"comercial","expected_tool":"comercial.md"}
+{"intent":"como tá meu pipeline","expected_domain":"comercial","expected_tool":"comercial.md"}
+{"intent":"discovery call amanhã","expected_domain":"comercial","expected_tool":"comercial.md"}
+{"intent":"pesquisa sobre mercado de IA","expected_domain":"pesquisa","expected_tool":"pesquisa.md"}
+{"intent":"compara supabase vs firebase","expected_domain":"pesquisa","expected_tool":"pesquisa.md"}
+{"intent":"estudo de mercado","expected_domain":"pesquisa","expected_tool":"pesquisa.md"}
+{"intent":"análise comparativa de ferramentas","expected_domain":"pesquisa","expected_tool":"pesquisa.md"}
+{"intent":"scrapear esses dados","expected_domain":"pesquisa","expected_tool":"pesquisa.md"}
+{"intent":"verifica se essa estatística procede","expected_domain":"pesquisa","expected_tool":"pesquisa.md"}
+{"intent":"campanha de lançamento completa","expected_domain":"pipeline-cross-domain","expected_tool":"playbooks"}
+{"intent":"fluxo completo da live","expected_domain":"pipeline-cross-domain","expected_tool":"playbooks"}
+{"intent":"do zero, pipeline editorial","expected_domain":"pipeline-cross-domain","expected_tool":"playbooks"}
+{"intent":"instalar OpenClaw na VPS","expected_domain":"setup","expected_tool":"setup-agents.md"}
+{"intent":"configurar Hermes","expected_domain":"setup","expected_tool":"setup-agents.md"}
+{"intent":"primeira vez no Claude Code","expected_domain":"setup","expected_tool":"setup-agents.md"}
+{"intent":"como conecto o Telegram","expected_domain":"setup","expected_tool":"setup-agents.md"}
+{"intent":"instalar skill nova","expected_domain":"setup","expected_tool":"setup-agents.md"}

@@ -1,0 +1,19 @@
+skill MorningBriefing
+description: Briefing matinal — inbox triage, agenda do dia, top 3 prioridades
+mode: default
+
+when "/claw briefing", "briefing", "bom dia", "começar o dia"
+  use Gmail.search_threads
+  with query="is:unread newer_than:1d", limit=30
+  then use Calendar.list_events
+  with day=${date}
+  then use memory.recall
+  with key="top_priorities_today"
+  then notify telegram "Briefing entregue. ${urgent_count} emails urgentes, ${meetings_count} reuniões hoje."
+
+when "/claw weekly"
+  use Calendar.list_events
+  with from=${date}, to=${date_plus_7d}
+  then use Calendar.suggest_time
+  with duration=120, count=3
+  then ask "Confirma os 3 blocos de foco propostos?"

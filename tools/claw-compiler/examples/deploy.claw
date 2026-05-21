@@ -1,0 +1,20 @@
+skill DeployHelper
+description: Atalho seguro de deploy com pre-flight checks (branch, working tree, CI)
+mode: dev
+
+when "/claw deploy", "deployar", "ship", "fazer deploy"
+  if branch == "main": abort "deploy só a partir de branch diferente de main"
+  if not working_tree_clean: abort "commitar mudanças primeiro (git status sujo)"
+  if not ci_green: abort "CI vermelho — rode gh run list pra investigar"
+  use gh
+  run "gh pr merge --squash --auto"
+  then notify telegram "shippei ${branch} para main"
+
+when "/claw rollback"
+  ask "Qual SHA reverter?"
+  with sha=${answer}
+  run "git revert ${sha} && git push"
+  then notify discord "#alerts" "ROLLBACK aplicado: ${sha}"
+
+when ambiguous
+  ask "Você quer deployar ou fazer rollback?"

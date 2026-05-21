@@ -30,19 +30,19 @@ Se o pedido cruzar domínios, monte uma mini-pipeline (ver `playbooks/`). Se amb
 
 | Domínio | Sinais (gatilhos no texto do user) | Despacho preferencial | Fallback |
 | --- | --- | --- | --- |
-| **Produtividade — email** | "email", "gmail", "mandar", "responder", "draft", "rascunho", "thread" | Gmail tools (`create_draft`, `search_threads`, `label_*`) | Browser + gmail.com |
+| **Produtividade — email** | "email", "gmail", "mandar", "responder", "draft", "rascunho", "thread", "inbox", "caixa de entrada" | Gmail tools (`create_draft`, `search_threads`, `label_*`) | Browser + gmail.com |
 | **Produtividade — agenda** | "reunião", "agenda", "calendar", "marcar", "horário livre", "convite" | Google Calendar tools (`create_event`, `suggest_time`, `list_events`) | Manual + share link |
 | **Produtividade — arquivos** | "doc", "drive", "planilha", "pdf", "upload", "compartilhar arquivo" | Google Drive tools (`search_files`, `read_file_content`, `create_file`) | iCloud/local FS |
 | **Produtividade — notas** | "notion", "wiki", "página", "base de conhecimento" | Notion (autenticar primeiro se necessário) | Obsidian local |
 | **Dados — Supabase** | "supabase", "tabela", "query", "migration", "RLS", "edge function" | Supabase MCP (`list_tables`, `execute_sql`, `apply_migration`) | psql direto |
-| **Dados — outros MCPs** | menção a CRM, banco, serviço com MCP autenticado | MCP correspondente | dashboard web do serviço |
+| **Dados — outros MCPs** | "CRM", "cliente no banco", "histórico no sistema", menção explícita a outro serviço com MCP autenticado | MCP correspondente | dashboard web do serviço |
 | **Conteúdo** | "slide", "roteiro", "teleprompter", "guia", "tutorial", "live", "post" | Playbook `playbooks/conteudo.md` | Higgsfield + edição manual |
 | **Mídia** | "vídeo", "imagem", "thumbnail", "virality", "clipper" | Higgsfield tools (`generate_image`, `generate_video`, `virality_predictor`) + skill `video-use` | — |
 | **Engenharia** | "PR", "code review", "deploy", "CI", "issue", "branch", "merge", "lint" | GitHub MCP + Claude Code Bash + Linear (se houver) | `gh` CLI direto |
-| **Comercial** | "lead", "proposta", "follow-up", "venda", "pipeline", "discovery call" | Playbook `playbooks/comercial.md` (CRM via MCP + Gmail + Calendar) | Spreadsheet manual |
-| **Pesquisa** | "pesquisa", "análise", "comparar empresas", "estudo de mercado", "scrapear" | Playbook `playbooks/pesquisa.md` (WebFetch + síntese + Notion) | Browser + cópia manual |
+| **Comercial** | "lead", "proposta", "follow-up", "followup", "venda", "pipeline comercial", "discovery call", "qualificar", "silencioso", "prepara orçamento" | Playbook `playbooks/comercial.md` (CRM via MCP + Gmail + Calendar) | Spreadsheet manual |
+| **Pesquisa** | "pesquisa", "análise", "comparar", "compara", "vs", "estudo de mercado", "scrapear", "fact-check", "procede", "verifica se" | Playbook `playbooks/pesquisa.md` (WebFetch + síntese + Notion) | Browser + cópia manual |
 | **Pipeline cross-domain** | "campanha", "lançamento", "fluxo completo", "do zero" | Carregar `playbooks/` relevantes e encadear | Quebrar em sub-pedidos |
-| **Setup/instalação** | "instalar", "configurar agente", "VPS", "primeira vez" | Playbook `playbooks/setup-agents.md` | Linkar docs oficiais |
+| **Setup/instalação** | "instalar", "configurar", "Hermes", "OpenClaw", "Claude Code", "VPS", "primeira vez", "conectar canal", "Telegram" | Playbook `playbooks/setup-agents.md` | Linkar docs oficiais |
 
 ---
 
