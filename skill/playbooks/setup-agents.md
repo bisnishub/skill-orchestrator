@@ -33,13 +33,44 @@ Pra novos membros da comunidade. Baseado nos guias oficiais da CCB.
 **Gatilho:** "skills da CCB", "skills brasileiras", "marketplace BR".
 
 1. Por enquanto, distribuição é via GitHub: `github.com/bisnishub/*`.
-2. Padrão de instalação:
+2. **OpenClaw:**
    ```bash
-   git clone https://github.com/bisnishub/<skill>.git
-   cp -r <skill>/skill ~/.openclaw/skills/<skill>
+   curl -fsSL https://raw.githubusercontent.com/bisnishub/<skill>/main/install.sh | bash
    ```
+   Ou manual: `cp -r <skill>/skill ~/.openclaw/skills/<skill>`
 3. `openclaw skills list` → confirmar carregamento.
 4. Em breve: publicar no ClawHub (clawhub.ai).
+
+## 5. Instalar skills no Hermes Agent
+**Gatilho:** "skill no Hermes", "Hermes não tá reconhecendo", "Nous Hermes".
+
+1. Hermes guarda skills em `~/.hermes/skills/` (host) → `/opt/data/skills/` (container).
+2. Installer dedicado (executar como root/sudo na VPS do Hermes):
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/bisnishub/<skill>/main/install-hermes.sh | sudo bash
+   ```
+3. Permissões importam: `chown hermes:hermes` (uid 1000). O installer faz sozinho.
+4. Recarregar: `cd ~/hermes && docker compose restart` (o installer também faz).
+5. Validar dentro do container:
+   ```bash
+   docker exec -it hermes bash -lc "ls /opt/data/skills/"
+   ```
+
+## 6. Diagnóstico ("não tá funcionando")
+**Gatilho:** "tá quebrado", "não responde", "erro X".
+
+**OpenClaw:**
+1. `openclaw doctor` — primeira parada.
+2. Logs: `~/.openclaw/logs/` (últimas 100 linhas).
+3. Heartbeat ativo? `openclaw status`.
+4. Conflito de skill? `openclaw skills list` + checar precedência.
+
+**Hermes:**
+1. `docker exec -it hermes bash -lc "uv run hermes doctor"`.
+2. Logs: `uv run hermes logs -f` dentro do container.
+3. Container saudável? `docker compose ps` em `~/hermes/`.
+4. Dashboard responde? `curl -I http://127.0.0.1:9119` deve retornar HTTP 405 (sinal de vida).
+5. Se persistir → abrir issue no repo correspondente com output do doctor anonimizado.
 
 ## 5. Diagnóstico ("não tá funcionando")
 **Gatilho:** "tá quebrado", "não responde", "erro X".
