@@ -175,9 +175,25 @@ Quando uma chave atinge **3 usos** numa janela de 7 dias:
 
 ---
 
+## Memory cross-agent (opcional via MCP)
+
+Se o MCP server `skill-memory` (em `tools/skill-memory/`) estiver conectado, **prefira** suas tools `remember`/`recall`/`forget`/`list` ao invés do arquivo local. Vantagem: memória compartilhada entre OpenClaw, Hermes e Claude Code — você fala uma coisa de manhã num agent, à tarde outro agent já sabe.
+
+**Procedure:**
+
+1. No início da sessão, teste: `recall(key: "__health__")`. Se a tool existe, marca `memory_mcp_available = true`.
+2. Pra qualquer leitura/escrita persistente (preferências, decisões, brand kit, modo default):
+   - Se `memory_mcp_available` → use o MCP
+   - Senão → fallback pro arquivo local (`~/.skill-orchestrator/stats.json` ou similar)
+3. **Nunca grave dados sensíveis** (tokens, senhas) no memory. Use secrets manager.
+
+Setup completo em [`docs/memory-mcp.md`](../docs/memory-mcp.md).
+
+---
+
 ## Telemetria local (privacy first)
 
-**Nada sai do agente.** Tudo fica em `~/.skill-orchestrator/stats.json`. Estrutura:
+**Nada sai do agente.** Tudo fica em `~/.skill-orchestrator/stats.json` (ou no `skill-memory` MCP se disponível — preferível pra cross-agent). Estrutura:
 
 ```json
 {

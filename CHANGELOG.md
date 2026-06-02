@@ -2,6 +2,21 @@
 
 Todas as mudanças relevantes da Skill Orchestrator. Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [SemVer](https://semver.org/lang/pt-BR/).
 
+## [0.7.0] — 2026-06-02
+
+### Adicionado
+- 🧠 **Memory MCP server (`tools/skill-memory/`)** — Node.js MCP server pra memória cross-agent compartilhada. SQLite local em `~/.skill-orchestrator/memory.db`. 4 tools: `remember`, `recall`, `forget`, `list`. Tags + busca em texto. Zero rede.
+- 📘 `docs/memory-mcp.md` — guia de integração nos 3 agents (Claude Code config, Hermes config, OpenClaw plugin)
+- SKILL.md ganhou seção "Memory cross-agent (opcional via MCP)" com procedure de detecção + fallback graceful pro arquivo local
+
+### Comportamento novo
+- Quando MCP `skill-memory` disponível: preferências, decisões, brand kit e modo default vivem nele → cross-agent
+- Quando indisponível: fallback automático pro `~/.skill-orchestrator/stats.json` (comportamento anterior preservado)
+
+### Privacy
+- MCP nunca envia dados pra rede
+- Dados sensíveis (tokens, senhas) explicitamente fora do escopo — usar secrets manager dedicado
+
 ## [0.6.0] — 2026-05-21
 
 ### Mudado (filosofia)
