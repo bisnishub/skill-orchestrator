@@ -84,22 +84,38 @@ Destino: `~/.openclaw/skills/orchestrator/`. Depois rode `/new` ou reinicie a se
 
 ---
 
-### 🌀 Hermes Agent (Nous Research, em Docker)
+### 🌀 Hermes Agent (Nous Research)
 
-Roda no **host da VPS** onde o Hermes está instalado (precisa de `sudo` pra mexer em `/home/hermes/.hermes/`):
+O Hermes pode rodar em duas configurações. **Escolha a sua:**
+
+#### Hermes local (macOS, sem container)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes-local.sh | bash
 ```
 
-Destino: `~/.hermes/skills/orchestrator/`. O installer ajusta `chown hermes:hermes` e roda `docker compose restart`.
+Destino: `~/.hermes/skills/orchestrator/`. Sem `sudo`, sem Docker. Recarregue o agent (`uv run hermes setup` ou reinicie).
 
-Override de paths (instalação custom):
+Override de path:
 
 ```bash
-HERMES_DATA=/seu/caminho/.hermes \
-HERMES_COMPOSE_DIR=/seu/caminho/hermes \
-sudo -E bash install-hermes.sh
+HERMES_DATA=/seu/caminho/.hermes bash install-hermes-local.sh
+```
+
+#### Hermes Docker (VPS, container `nousresearch/hermes-agent`)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes-docker.sh | sudo bash
+```
+
+Destino: `/home/hermes/.hermes/skills/orchestrator/`. O installer ajusta `chown hermes:hermes` (uid 1000) e roda `docker compose restart`.
+
+Override de paths:
+
+```bash
+HERMES_DATA=/seu/.hermes \
+HERMES_COMPOSE_DIR=/seu/hermes \
+sudo -E bash install-hermes-docker.sh
 ```
 
 Validar:
@@ -169,7 +185,8 @@ skill/                          ← source-of-truth única (idêntica nos 3 agen
     └── setup-agents.md         ← onboarding/instalação/diagnóstico (3 agents)
 
 install.sh                      ← installer OpenClaw (nativo)
-install-hermes.sh               ← installer Hermes (Docker + permissões + restart)
+install-hermes-local.sh         ← installer Hermes local macOS (sem container)
+install-hermes-docker.sh        ← installer Hermes Docker/VPS (chown + restart container)
 install-claude-code.sh          ← installer Claude Code (machine-wide ou per-project)
 ```
 
@@ -184,7 +201,8 @@ A skill é **pequena por design**: a matriz vive no `SKILL.md`, e os playbooks s
 | Agent | Path destino | Reload | Status |
 | --- | --- | --- | --- |
 | OpenClaw (macOS/Linux/Win) | `~/.openclaw/skills/orchestrator/` | `/new` na sessão | ✅ |
-| Hermes Agent (Docker) | `~/.hermes/skills/orchestrator/` → `/opt/data/skills/` | `docker compose restart` | ✅ |
+| Hermes Agent (local macOS) | `~/.hermes/skills/orchestrator/` | `uv run hermes setup` / restart | ✅ |
+| Hermes Agent (Docker/VPS) | `~/.hermes/skills/orchestrator/` → `/opt/data/skills/` | `docker compose restart` | ✅ |
 | Claude Code (CLI/IDE) | `~/.claude/skills/orchestrator/` ou `.claude/skills/orchestrator/` | reinicia o CLI / nova sessão | ✅ |
 | Outros agents Claude Code-compatíveis | — | — | provavelmente funciona se respeita o formato Skill |
 

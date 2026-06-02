@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# 🦞 Skill Orchestrator — installer para Hermes Agent (Nous Research)
-# Roda no HOST do Hermes (a VPS ou máquina local que tem o docker-compose).
+# 🦞 Skill Orchestrator — installer para Hermes Agent (modo DOCKER/VPS)
+# Use este script se você roda o Hermes em CONTAINER DOCKER (típico em VPS).
+# Para Hermes em macOS LOCAL (sem container), use install-hermes-local.sh.
 # CCB — Comunidade Claude/Claw Brasil · github.com/bisnishub/skill-orchestrator
 set -euo pipefail
 

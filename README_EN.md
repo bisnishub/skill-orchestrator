@@ -80,22 +80,32 @@ curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/i
 
 Target: `~/.openclaw/skills/orchestrator/`. Then run `/new` or restart your session.
 
-### 🌀 Hermes Agent (Nous Research, Docker)
+### 🌀 Hermes Agent (Nous Research)
 
-Runs on the **Hermes host** (requires `sudo` to write to `/home/hermes/.hermes/`):
+Hermes runs in two configurations. **Pick yours:**
+
+#### Hermes local (macOS, no container)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes-local.sh | bash
 ```
 
-Target: `~/.hermes/skills/orchestrator/`. Installer handles `chown hermes:hermes` and `docker compose restart`.
+Target: `~/.hermes/skills/orchestrator/`. No `sudo`, no Docker. Reload the agent (`uv run hermes setup` or restart).
+
+#### Hermes Docker (VPS, `nousresearch/hermes-agent` container)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/skill-orchestrator/main/install-hermes-docker.sh | sudo bash
+```
+
+Target: `/home/hermes/.hermes/skills/orchestrator/`. Installer handles `chown hermes:hermes` (uid 1000) and `docker compose restart`.
 
 Custom paths:
 
 ```bash
 HERMES_DATA=/your/.hermes \
 HERMES_COMPOSE_DIR=/your/hermes \
-sudo -E bash install-hermes.sh
+sudo -E bash install-hermes-docker.sh
 ```
 
 Verify:

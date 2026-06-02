@@ -2,6 +2,34 @@
 
 Todas as mudanças relevantes da Skill Orchestrator. Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e [SemVer](https://semver.org/lang/pt-BR/).
 
+## [0.6.0] — 2026-05-21
+
+### Mudado (filosofia)
+- 🎯 **Ação > explicação.** SKILL.md agora distingue rotas simples (executar direto) de compostas (delegar/playbook) de complexas (swarm). Princípio antigo "NÃO é executar" foi correção literal demais — virou regra prática
+- 🔍 **Tool Discovery & Fallback** explícitos. Seção nova com tabela mapeando tools canônicas pros equivalentes em cada agente host (OpenClaw plugins, Hermes skills, Claude Code MCPs). Falha de tool nunca vira "não consigo" — sempre fallback
+
+### Adicionado
+- `install-hermes-local.sh` — installer dedicado pra Hermes em macOS LOCAL (sem container, sem sudo, sem Docker)
+
+### Mudado (estrutura)
+- `install-hermes.sh` → renomeado pra `install-hermes-docker.sh` (deixa explícito que é o caminho VPS/container)
+- README e setup-agents.md com seções separadas: Hermes local macOS vs Hermes Docker
+
+## [0.5.0] — 2026-05-21
+
+### Adicionado
+- 🧠 **Self-improving orchestrator** — playbook `auto-improve.md` instrui logging em `~/.skill-orchestrator/log.jsonl`. Comando `/claw audit` lê padrões via `tools/audit/audit.py` (Python puro), propõe diffs no SKILL.md com backup + confirmação humana. Auto-edit silencioso é red flag — sempre diff visível, sempre reversível.
+- 🎯 **Eval suite pública** — `tools/eval-suite/corpus.jsonl` (64 frases anotadas, 13 domínios) + `runner.py` (parser + scoring + breakdown). Accuracy atual **95.3%**. Matriz expandida com gatilhos descobertos pelo eval: inbox, CRM, follow-up, fact-check, etc.
+- 🤖 **Multi-agent swarm** — `/claw swarm <objetivo>` dispara N subagents em paralelo. `playbooks/swarm.md` + `docs/swarm-protocol.md` formaliza JSON de hand-off (status, outputs, needs_from_others, blockers). Cap 7 subagents, timeout 5min, sem ações destrutivas sem confirmação humana.
+- 🦞 **`.claw` DSL + compiler** — linguagem declarativa pra escrever skills sem YAML/markdown. `docs/claw-dsl.md` (spec), `tools/claw-compiler/claw.py` (compiler Python puro), 3 exemplos: deploy/briefing/triage. Democratiza criação de skills pra não-devs.
+
+### Mudado
+- Matriz de roteamento expandida com gatilhos descobertos pelo eval suite (inbox, CRM, follow-up, compara/vs, fact-check, Hermes/Telegram/conectar)
+
+### Nova estrutura
+- `docs/` — specs formais (DSL, protocolos)
+- `tools/` — utilitários executáveis (audit, eval-suite, claw-compiler)
+
 ## [0.4.0] — 2026-05-21
 
 ### Adicionado

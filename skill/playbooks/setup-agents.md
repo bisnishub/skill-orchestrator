@@ -33,14 +33,24 @@ Onboarding pra **OpenClaw**, **Hermes Agent** e **Claude Code**. Inclui instala�
 
 ---
 
-## 4. Hermes Agent — instalação (Docker)
-**Gatilho:** "instalar Hermes", "Hermes na VPS", "Nous Research agent".
+## 4a. Hermes Agent — instalação LOCAL (macOS sem container)
+**Gatilho:** "instalar Hermes no Mac", "Hermes local", "Hermes sem Docker".
 
-1. Pré-requisitos: VPS ou máquina Linux com Docker + docker-compose v2.
+1. Pré-requisitos: macOS 13+, Homebrew, Python 3.11+, `uv` (`brew install uv`).
+2. Clone o Hermes ou use a release oficial conforme docs da Nous Research.
+3. Skills vivem em `~/.hermes/skills/<nome>/` (host nativo, **sem** container).
+4. Inicialização: `uv run hermes setup` (wizard interativo).
+5. Reload de skills: reinicie o processo Hermes local OU `uv run hermes setup` de novo.
+
+## 4b. Hermes Agent — instalação DOCKER (VPS)
+**Gatilho:** "Hermes na VPS", "Hermes em container", "deploy Hermes 24/7".
+
+1. Pré-requisitos: VPS Linux com Docker + docker-compose v2.
 2. Estrutura recomendada: `~/hermes/docker-compose.yml` + dados em `~/.hermes/`.
 3. Imagem oficial: `nousresearch/hermes-agent:latest`.
 4. Subir: `docker compose up -d` dentro de `~/hermes/`.
 5. Wizard interativo: `docker exec -it hermes bash` → `uv run hermes setup`.
+6. Reload de skills: `cd ~/hermes && docker compose restart`.
 
 ## 5. Hermes — Integrar canais
 **Gatilho:** "Telegram no Hermes", "conectar canal Hermes".
@@ -73,9 +83,15 @@ curl -fsSL https://raw.githubusercontent.com/bisnishub/<skill>/main/install.sh |
 ```
 → `openclaw skills list` confirma.
 
-**Hermes** (na VPS, com sudo):
+**Hermes local (macOS):**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bisnishub/<skill>/main/install-hermes.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/<skill>/main/install-hermes-local.sh | bash
+```
+→ valida: `ls ~/.hermes/skills/`.
+
+**Hermes Docker (VPS, com sudo):**
+```bash
+curl -fsSL https://raw.githubusercontent.com/bisnishub/<skill>/main/install-hermes-docker.sh | sudo bash
 ```
 → valida: `docker exec -it hermes bash -lc "ls /opt/data/skills/"`.
 
